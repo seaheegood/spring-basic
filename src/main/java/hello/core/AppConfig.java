@@ -22,6 +22,7 @@ public class AppConfig { // AppConfig 는 애플리케이션의 실제 동장엑
 
     @Bean // Bean 어노테이션이라 적힌 메서드를 모두 호출해서 반환된 객체를 스프링 컨테이너에 등록한다 -> 이렇게 등록된 객체를 스프링 빈이라고 칭함
     public MemberService memberService() {
+        System.out.println("call AppConfig.memberService");
         // 생성자 주입
         // 클라이언트인 MemberServiceImpl 입장에서 보면 의존관계를 마치 외부에서 주입하는 것 같다하여
         // DI(Dependency Injection) = 의존관계 주입 또는 의존성 주입
@@ -30,11 +31,13 @@ public class AppConfig { // AppConfig 는 애플리케이션의 실제 동장엑
 
     @Bean
     public MemberRepository memberRepository() {
+        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService() {
+        System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 

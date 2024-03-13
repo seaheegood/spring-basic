@@ -1,5 +1,9 @@
 package hello.core.member;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class MemberServiceImpl implements MemberService {
 
     // rely on abstraction(추상화) and embodiment(구체화)
@@ -9,6 +13,7 @@ public class MemberServiceImpl implements MemberService {
     // 오로지 MemberRepository 라는 인터페이스만이 존재한다
     // -> 추상화에만 의존하는 것 DIP 를 지키는 것
 
+    @Autowired
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
@@ -21,5 +26,10 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member findMember(Long memberId) {
         return memberRepository.findById(memberId);
+    }
+
+    //테스트 용도
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
     }
 }
